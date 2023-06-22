@@ -1,9 +1,9 @@
+//이미지 API
 const { Router } = require("express");
 require("dotenv").config();
 const imageRouter = Router();
 const Image = require("../models/Image");
 const { upload } = require("../middleware/imageUpload");
-// const { ADMIN, ADMIN_ID } = process.env; //super //superadimn
 const fs = require("fs"); //file system
 const { promisify } = require("util");
 const mongoose = require("mongoose");
@@ -13,6 +13,7 @@ const { v4: uuid } = require("uuid");
 const mime = require("mime-types");
 
 imageRouter.post("/presigned", async (req, res) => {
+	//DB저장, 유저정보 저장
   try {
     if (!req.user) throw new Error("권한이 없습니다.");
     const { contentTypes } = req.body;
@@ -24,8 +25,6 @@ imageRouter.post("/presigned", async (req, res) => {
         const imageKey = `${uuid()}.${mime.extension(contentType)}`;
         const key = `raw/${imageKey}`;
         const presigned = await getSignedUrl({ key });
-
-				// console.log(imageKey);
         return { imageKey, presigned };
       })
     );

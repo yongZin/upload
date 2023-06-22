@@ -1,3 +1,4 @@
+//이미지 업로드
 const multer = require("multer");
 const { v4: uuid } = require("uuid");
 const mime = require("mime-types");

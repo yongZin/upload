@@ -1,3 +1,4 @@
+//AWS 인증
 require("dotenv").config();
 const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 const { createPresignedPost } = require("@aws-sdk/s3-presigned-post");
